@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name | Portfolio</title>
+<meta name="description" content="Researcher in [your field]. Add one sentence about your work here.">
+<meta property="og:title" content="Your Name | Portfolio">
+<meta property="og:description" content="Add one sentence about your work here.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#14232b; --muted:#53656e;
+  --line:#d3dcdf; --accent:#1c6b87; --accent-ink:#ffffff; --tag:#e3eef2;
+  color-scheme:light;
+}
+:root:not([data-theme="light"]){
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1a20; --surface:#16252d; --ink:#e8eff1; --muted:#9db0b8;
+    --line:#2a3d47; --accent:#6cc0dc; --accent-ink:#0f1a20; --tag:#1e3541;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1a20; --surface:#16252d; --ink:#e8eff1; --muted:#9db0b8;
+  --line:#2a3d47; --accent:#6cc0dc; --accent-ink:#0f1a20; --tag:#1e3541;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Work Sans",system-ui,sans-serif}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+/* nav */
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:20px;height:56px}
+nav .brand{font-family:"Newsreader",serif;font-weight:600;font-size:1.15rem;color:var(--ink);text-decoration:none;margin-right:auto}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+nav ul a{color:var(--muted);text-decoration:none;font-size:.92rem}
+nav ul a:hover{color:var(--ink)}
+.icon-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;width:38px;height:38px;cursor:pointer;font-size:1rem}
+#menu{display:none}
+@media(max-width:760px){
+  #menu{display:inline-block}
+  nav ul{display:none;position:absolute;top:56px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 24px}
+  nav ul.open{display:flex}
+  nav ul a{display:block;padding:10px 0}
+}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:center;padding:72px 0 56px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:-.02em}
+.hero .role{font-size:1.2rem;color:var(--accent);margin:14px 0 18px;font-weight:500}
+.hero p{max-width:56ch;color:var(--muted);margin:0 0 20px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:11px 20px;border-radius:8px;text-decoration:none;font-weight:600;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.photo{width:100%;aspect-ratio:4/5;border-radius:140px 140px 12px 12px;background:var(--tag);display:grid;place-items:center;overflow:hidden;font:600 4rem "Newsreader",serif;color:var(--accent)}
+.photo img{width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:40px}.photo{max-width:220px;order:-1}}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.grid>h2{font-size:1.7rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr;gap:20px}}
+
+.timeline{border-left:2px solid var(--line);padding-left:24px;display:grid;gap:30px}
+.item{position:relative}
+.item::before{content:"";position:absolute;left:-31px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.item time{font-size:.88rem;color:var(--muted)}
+.item h3{font-size:1.25rem;margin:2px 0}
+.item .where{color:var(--accent);font-weight:500}
+.item p,.item ul{margin:8px 0 0;color:var(--muted)}
+.item ul{padding-left:18px}
+
+.interests{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:0;list-style:none}
+.interests li{background:var(--tag);padding:7px 14px;border-radius:99px;font-size:.93rem}
+
+.projects{display:grid;gap:28px}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:240px 1fr}
+.project .img{background:var(--tag);min-height:170px}
+.project .img img{width:100%;height:100%;object-fit:cover;display:block}
+.project .body{padding:22px}
+.project h3{font-size:1.3rem;margin-bottom:6px}
+.project p{margin:0 0 10px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;font-size:.82rem}
+.tags span{background:var(--tag);padding:2px 10px;border-radius:99px}
+@media(max-width:760px){.project{grid-template-columns:1fr}}
+
+.pubs{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.pubs li{padding-left:16px;border-left:3px solid var(--accent)}
+.pubs .status{font-size:.85rem;color:var(--muted)}
+
+.skills{display:grid;gap:16px}
+.skills h3{font-size:1.05rem;margin-bottom:6px}
+
+.contact a.big{font:600 clamp(1.3rem,4vw,2rem) "Newsreader",serif;word-break:break-all}
+footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="brand" href="#top">Your Name</a>
+      <ul id="links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="icon-btn" id="theme" aria-label="Switch light or dark mode">☀</button>
+      <button class="icon-btn" id="menu" aria-label="Open menu" aria-expanded="false">☰</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- 1. HERO: replace text. Put your photo at img/profile.jpg -->
+  <div class="hero">
+    <div>
+      <h1>Your Name</h1>
+      <div class="role">Your title, e.g. M.Sc. Researcher, Your University</div>
+      <p>Write two or three sentences: what you study, what methods you use, and what you are working on now.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn" href="mailto:you@example.com">Email me</a>
+      </div>
+    </div>
+    <div class="photo"><img src="img/profile.jpg" alt="Portrait of Your Name" onerror="this.remove();this.parentNode.textContent='YN'"></div>
+  </div>
+
+  <!-- 2. ABOUT -->
+  <section id="about" class="grid">
+    <h2>About</h2>
+    <div>
+      <p>Tell your story in a short paragraph. Where are you from, what drew you to your field, and what do you want to do next?</p>
+      <ul class="interests" aria-label="Research interests">
+        <li>Interest one</li>
+        <li>Interest two</li>
+        <li>Interest three</li>
+        <li>Interest four</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. EDUCATION: copy one .item per degree, newest first -->
+  <section id="education" class="grid">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="item">
+        <time>2024 – Present</time>
+        <h3>M.Sc. in Your Subject</h3>
+        <div class="where">Your University</div>
+        <p>Thesis: Your thesis title. Supervisor: Dr. Name.</p>
+      </div>
+      <div class="item">
+        <time>2019 – 2023</time>
+        <h3>B.Sc. in Your Subject</h3>
+        <div class="where">Your University</div>
+        <p>CGPA, scholarships, or thesis topic.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EXPERIENCE -->
+  <section id="experience" class="grid">
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="item">
+        <time>Jan 2025 – Present</time>
+        <h3>Research Assistant</h3>
+        <div class="where">Project or Organization</div>
+        <ul>
+          <li>What you did, with a result or number if you can.</li>
+          <li>Tools or methods you used.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <time>2023 – 2024</time>
+        <h3>Another Role</h3>
+        <div class="where">Organization</div>
+        <ul><li>Short description of your work.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PROJECTS: copy one .project per project. Images go in img/ -->
+  <section id="projects" class="grid">
+    <h2>Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <div class="img"><img src="img/project1.jpg" alt="Project one" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Project title</h3>
+          <p>Two sentences on the problem, your method, and the outcome.</p>
+          <div class="tags"><span>Tool</span><span>Method</span><span>Topic</span></div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="img"><img src="img/project2.jpg" alt="Project two" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Second project</h3>
+          <p>Describe what you did and why it matters.</p>
+          <div class="tags"><span>Tool</span><span>Method</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6. PUBLICATIONS: put PDFs in papers/ -->
+  <section id="publications" class="grid">
+    <h2>Publications</h2>
+    <ul class="pubs">
+      <li>
+        Surname, I., &amp; Coauthor, A. “Paper title.” <em>Journal or Conference</em>, 2025.
+        <div class="status">Published · <a href="papers/your-paper.pdf">View PDF</a></div>
+      </li>
+      <li>
+        Surname, I. “Another paper title.” <em>Journal</em>.
+        <div class="status">Under review</div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 7. SKILLS -->
+  <section id="skills" class="grid">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div><h3>Software</h3><ul class="interests"><li>ArcGIS</li><li>R</li><li>Excel</li></ul></div>
+      <div><h3>Methods</h3><ul class="interests"><li>Method one</li><li>Method two</li></ul></div>
+      <div><h3>Languages</h3><ul class="interests"><li>Native language</li><li>English</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 8. CONTACT -->
+  <section id="contact" class="grid contact">
+    <h2>Contact</h2>
+    <div>
+      <p>Open to collaborations, internships, and research positions.</p>
+      <a class="big" href="mailto:you@example.com">you@example.com</a>
+      <p><a href="https://www.linkedin.com/in/your-profile">LinkedIn</a> · <a href="https://github.com/yourusername">GitHub</a> · Your City, Country</p>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Your Name</div></footer>
+
+<script>
+  var root=document.documentElement, btn=document.getElementById('theme');
+  function isDark(){
+    var t=root.getAttribute('data-theme');
+    return t ? t==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function paint(){ btn.textContent=isDark()?'☾':'☀'; }
+  btn.onclick=function(){ root.setAttribute('data-theme', isDark()?'light':'dark'); paint(); };
+  paint();
+
+  var menu=document.getElementById('menu'), links=document.getElementById('links');
+  menu.onclick=function(){
+    var open=links.classList.toggle('open');
+    menu.setAttribute('aria-expanded',open);
+  };
+  links.onclick=function(){ links.classList.remove('open'); menu.setAttribute('aria-expanded',false); };
+</script>
+</body>
+</html>
