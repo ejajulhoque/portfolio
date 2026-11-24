@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EJAJUL HOQUE | Portfolio</title>
-<meta name="description" content="Researcher in Polymer Materials Science. Add one sentence about your work here.">
+<meta name="description" content="Researcher in Polymer Materials Science.">
 <meta property="og:title" content="Ejajul Hoque | Portfolio">
-<meta property="og:description" content="Add one sentence about your work here.">
+<meta property="og:description" content="Researcher in Polymer Materials Science.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -105,6 +105,205 @@ section{padding:56px 0;border-top:1px solid var(--line)}
 .contact a.big{font:600 clamp(1.3rem,4vw,2rem) "Newsreader",serif;word-break:break-all}
 footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  width:100%;
+  grid-column:1 / -1;   /* spans the full width if the section is a grid */
+  flex:1 1 100%;        /* spans the full width if the section is a flex row */
+}
+@media (max-width:700px){
+  .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+.stat{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-bottom:4px solid #7fb5a0;
+  border-radius:10px;
+  padding:24px 16px;
+  text-align:center;
+}
+.stat:nth-child(2){ border-bottom-color:#f2c27b; }
+.stat:nth-child(3){ border-bottom-color:#e0705a; }
+.stat .num{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:2.4rem;
+  font-weight:700;
+  color:var(--accent);
+}
+.stat .label{
+  margin-top:6px;
+  font-size:.95rem;
+  color:var(--muted);
+}
+
+.item .where{ display:inline; }
+.sep{ color:var(--muted); margin:0 6px; }
+
+#awards .pubs strong,
+#certifications .pubs strong{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--ink);
+}
+
+#certifications .status a{
+  color:var(--accent);
+  font-weight:600;
+}
+
+html{ scroll-padding-top:80px; }
+
+.certs{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.certs summary{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  list-style:none;
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--ink);
+}
+.certs summary::-webkit-details-marker{ display:none; }
+.certs summary::before{
+  content:"+";
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  color:var(--accent);
+  font-size:1rem;
+  line-height:1;
+}
+.certs[open] summary::before{ content:"\2212"; }
+.certs .pubs{ margin-top:16px; }
+.certs .pubs strong{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.1rem;
+  color:var(--ink);
+}
+.certs .status a{ color:var(--accent); font-weight:600; }
+.certs{ grid-column:2; }
+
+.skills > div + div{ margin-top:16px; }
+
+.certs{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.certs summary{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  list-style:none;
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--ink);
+}
+.certs summary::-webkit-details-marker{ display:none; }
+.certs summary::before{
+  content:"+";
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  color:var(--accent);
+  font-size:1rem;
+  line-height:1;
+}
+.certs[open] summary::before{ content:"\2212"; }
+.certs .pubs{ margin-top:16px; }
+.certs .pubs strong{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.1rem;
+  color:var(--ink);
+}
+.certs .status a{ color:var(--accent); font-weight:600; }
+
+.photos{ padding:32px 0; }
+.photo-row{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.photo-row img{
+  display:block;
+  width:100%;
+  height:340px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.photo-caption{
+  margin:10px 0 0;
+  text-align:right;
+  font-size:.95rem;
+  color:var(--muted);
+}
+@media (max-width:700px){
+  .photo-row{ grid-template-columns:1fr; }
+  .photo-row img{ height:auto; aspect-ratio:4 / 3; }
+}
+#contact > div > :first-child{ margin-top:0; }
+#contact h2{ margin-top:0; }
+
+.contact-body > *:first-child{ margin-top:0; }
+.contact-icons{
+  display:flex;
+  gap:12px;
+  margin:16px 0;
+}
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--accent);
+  text-decoration:none;
+}
+a.icon-btn:hover{
+  background:var(--accent);
+  color:var(--accent-ink);
+}
+.contact-loc{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.skills > div + div{ margin-top:16px; }
+
+#certifications .pubs strong{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--ink);
+}
+#certifications .status a{
+  color:var(--accent);
+  font-weight:600;
+}
+
 </style>
 </head>
 <body>
@@ -112,7 +311,7 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
 <header>
   <div class="wrap">
     <nav aria-label="Main">
-      <a class="brand" href="#top">Your Name</a>
+      <a class="brand" href="#top">Ejajul Hoque</a>
       <ul id="links">
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
@@ -133,27 +332,49 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
   <!-- 1. HERO: replace text. Put your photo at img/profile.jpg -->
   <div class="hero">
     <div>
-      <h1>Your Name</h1>
-      <div class="role">Your title, e.g. M.Sc. Researcher, Your University</div>
-      <p>Write two or three sentences: what you study, what methods you use, and what you are working on now.</p>
+      <h1>EJAJUL HOQUE</h1>
+      <div class="role">Ph.D. Candidate at the Department of Mechanical, Materials & Industrial Engineering at the University of Cincinnati</div>
+      <p>I study polymer structure-property relationships using rheology and x-ray scattering techniques, focusing on the optimization of polymer processing for sustainable and advanced applications.</p>
       <div class="btns">
         <a class="btn primary" href="#projects">See my projects</a>
-        <a class="btn" href="mailto:you@example.com">Email me</a>
+        <a class="btn" href="mailto:ejajulhoque@gmail.com">Email me</a>
       </div>
     </div>
     <div class="photo"><img src="img/profile.jpg" alt="Portrait of Your Name" onerror="this.remove();this.parentNode.textContent='YN'"></div>
   </div>
 
+<!-- STATS -->
+<section class="grid">
+  <div class="stats">
+    <div class="stat">
+      <div class="num">6</div>
+      <div class="label">Publications</div>
+    </div>
+    <div class="stat">
+      <div class="num">4</div>
+      <div class="label">h-index</div>
+    </div>
+    <div class="stat">
+      <div class="num">4</div>
+      <div class="label">Certifications</div>
+    </div>
+    <div class="stat">
+      <div class="num">6+</div>
+      <div class="label">Years of Research</div>
+    </div>
+  </div>
+</section>
+
   <!-- 2. ABOUT -->
   <section id="about" class="grid">
     <h2>About</h2>
     <div>
-      <p>Tell your story in a short paragraph. Where are you from, what drew you to your field, and what do you want to do next?</p>
+      <p>I am originally from Bangladesh and moved to the United States to pursue my graduate studies. I am an ex-Textile Materials Engineer. The passion for polymers and fibrous materials drew me to the field of Polymer Science. Upon graduation, I aim to continue researching in industrial polymers in corporate R&D setting.</p>
       <ul class="interests" aria-label="Research interests">
-        <li>Interest one</li>
-        <li>Interest two</li>
-        <li>Interest three</li>
-        <li>Interest four</li>
+        <li>Speciality Polymers</li>
+        <li>Process Optimization</li>
+        <li>Design of Experiments</li>
+        <li>Problem Solving</li>
       </ul>
     </div>
   </section>
@@ -163,41 +384,86 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
     <h2>Education</h2>
     <div class="timeline">
       <div class="item">
-        <time>2024 – Present</time>
-        <h3>M.Sc. in Your Subject</h3>
-        <div class="where">Your University</div>
-        <p>Thesis: Your thesis title. Supervisor: Dr. Name.</p>
+        <time>August 2022 – Present</time>
+        <h3>Ph.D. in Materials Science</h3>
+        <div class="where">University of Cincinnati</div>
+        <p>Dissertation: TBD. Supervisor: Dr. Benjamin M. Yavitt.</p>
       </div>
       <div class="item">
-        <time>2019 – 2023</time>
-        <h3>B.Sc. in Your Subject</h3>
-        <div class="where">Your University</div>
-        <p>CGPA, scholarships, or thesis topic.</p>
+        <time>January 2020 – August 2022</time>
+        <h3>M.Sc. in Biopolymers</h3>
+        <div class="where">Texas Tech University</div>
+        <p>CGPA 4.00. Thesis: Application of organoselenium compounds to cotton textiles to impart antimicrobial property.</p>
+      </div>
+      <div class="item">
+        <time>January 2011 – November 2015</time>
+        <h3>B.Sc. in Textile Engineering</h3>
+        <div class="where">University of Dhaka, Bangladesh</div>
+        <p>CGPA 3.76. Thesis: Functionalization of cotton textiles for salt-free dyeing.</p>
       </div>
     </div>
   </section>
 
   <!-- 4. EXPERIENCE -->
-  <section id="experience" class="grid">
-    <h2>Experience</h2>
-    <div class="timeline">
-      <div class="item">
-        <time>Jan 2025 – Present</time>
-        <h3>Research Assistant</h3>
-        <div class="where">Project or Organization</div>
-        <ul>
-          <li>What you did, with a result or number if you can.</li>
-          <li>Tools or methods you used.</li>
-        </ul>
-      </div>
-      <div class="item">
-        <time>2023 – 2024</time>
-        <h3>Another Role</h3>
-        <div class="where">Organization</div>
-        <ul><li>Short description of your work.</li></ul>
-      </div>
+<section id="experience" class="grid">
+  <h2>Experience</h2>
+  <div class="timeline">
+
+    <div class="item">
+      <time>August 2023 &ndash; Present</time>
+      <h3>Graduate Research Assistant</h3>
+      <div class="where">Chemical and Environmental Engineering, University of Cincinnati</div>
+      <ul>
+        <li>Lead internally and externally funded research projects, including experimental design, execution, data analysis, and reporting.</li>
+        <li>Investigate the rheological behavior and structure&ndash;property relationships of thermoplastics, thermosets, resins, elastomers, adhesives, coatings, and rubbers.</li>
+        <li>Characterize materials using DSC, TGA, FTIR, and rheometry, plus synchrotron-based X-ray scattering (SAXS/WAXS).</li>
+        <li>Collaborate across research groups on conceptualization, data interpretation, and publications.</li>
+        <li>Mentor undergraduate researchers and train new lab members in instrument operation and laboratory safety.</li>
+      </ul>
     </div>
-  </section>
+
+    <div class="item">
+      <time>August 2022 &ndash; August 2023</time>
+      <h3>Graduate Teaching Assistant</h3>
+      <div class="where">Mechanical, Materials and Industrial Engineering, University of Cincinnati</div>
+      <ul>
+        <li>Supported undergraduate lectures and laboratory courses, helping students with engineering concepts, experimental procedures, and data collection.</li>
+        <li>Held office hours and graded assignments and lab reports, giving technical feedback on analysis, documentation, and problem-solving.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <time>January 2020 &ndash; August 2022</time>
+      <h3>Graduate Research Assistant</h3>
+      <div class="where">Fiber and Biopolymer Research Institute, Texas Tech University</div>
+      <ul>
+        <li>Developed and evaluated biofilm-resistant textiles using pad&ndash;cure and exhaustion processes for healthcare and wound-healing applications.</li>
+        <li>Worked with a startup company and the TTU Health Sciences Center to screen novel antimicrobial products for commercialization potential.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <time>March 2018 &ndash; November 2019</time>
+      <h3>Executive, R&amp;D</h3>
+      <div class="where">Hameem Textiles Limited, Bangladesh</div>
+      <ul>
+        <li>Analyzed buyer samples and material specifications, sourced raw materials, and supported sample-to-pilot-scale product development.</li>
+        <li>Partnered with Marketing and cross-functional teams to turn buyer requirements into product concepts and supported technical presentations at international textile fairs.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <time>February 2016 &ndash; February 2018</time>
+      <h3>Jr. Executive, Production</h3>
+      <div class="where">Denim Expert Limited, Bangladesh</div>
+      <ul>
+        <li>Led denim washing and wet-processing operations, managing production recipes, chemical inventory, manpower, and process execution to meet quality and delivery targets.</li>
+        <li>Worked with Sample Development and Quality Control to scale lab recipes to bulk production, troubleshoot process issues, and reduce finished-product defects.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
 
   <!-- 5. PROJECTS: copy one .project per project. Images go in img/ -->
   <section id="projects" class="grid">
@@ -206,59 +472,177 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
       <article class="project">
         <div class="img"><img src="img/project1.jpg" alt="Project one" onerror="this.remove()"></div>
         <div class="body">
-          <h3>Project title</h3>
-          <p>Two sentences on the problem, your method, and the outcome.</p>
-          <div class="tags"><span>Tool</span><span>Method</span><span>Topic</span></div>
+          <h3>3D printing of photoactive acrylate (nano-composite) resins</h3>
+          <p>Lead Researcher</p>
+          <p>Highly filled nano-composite resin has been challenging to 3D print, I formulate a model silica-resin system to understand the effect of rheology of uncured resin on the final 3D printed part, I established that, shear rheology is not the best indicator of printability.</p>
+          <div class="tags"><span>Photo-rheology</span><span>Structure-property Relationships</span><span>Thermoset Resins</span></div>
         </div>
       </article>
       <article class="project">
         <div class="img"><img src="img/project2.jpg" alt="Project two" onerror="this.remove()"></div>
         <div class="body">
-          <h3>Second project</h3>
-          <p>Describe what you did and why it matters.</p>
-          <div class="tags"><span>Tool</span><span>Method</span></div>
+          <h3>Flow-induced crystallization (FIC) of polylactic acid (PLA)</h3>
+          <p>Lead Researcher</p>
+          <p>The degree of crystallinity has been a problem for enzymatic degradation of PLA, through FIC using shear rheometer, I was able to tune the crystal morphology, which improved the degradation rate.</p>
+          <div class="tags"><span>Melt Rheology</span><span>Flow-induced Crystallization</span><span>Thermoplastics</span></div>
         </div>
       </article>
+      <article class="project">
+        <div class="img"><img src="img/project2.jpg" alt="Project two" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Cure kinetics and network formation in PDMS bottlebrush elastomers</h3>
+          <p>Contributing Researcher</p>
+          <p>Bottlebrush elastomers have grafted side chains that suppress entanglements, so their network formation differs from linear polymers. Using time-resolved rheology during catalytic curing, we tracked the sol-gel transition and showed that side chains lower the fractal dimension of the critical gel cluster. Time-cure superposition revealed a universal network formation process.</p>
+          <div class="tags"><span>Polymer Formulation</span><span>Time-cure superposition</span><span>Elastomers</span></div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="img"><img src="img/project2.jpg" alt="Project two" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Filler transport in tire rubber under tire–road contact</h3>
+          <p>Collaborative Researcher</p>
+          <p>Filler particles released from tires are an environmental concern, so it is important to understand how fillers move inside the rubber under the loading a tire experiences while driving. We studied particle motion in the rubber matrix using X-ray photon correlation spectroscopy (XPCS).</p>
+          <div class="tags"><span>Tire-road Contact Simulation</span><span>Synchrotron X-ray Scattering</span><span>Rubbers</span></div>
+        </div>
+        </article>
     </div>
   </section>
 
-  <!-- 6. PUBLICATIONS: put PDFs in papers/ -->
-  <section id="publications" class="grid">
-    <h2>Publications</h2>
-    <ul class="pubs">
-      <li>
-        Surname, I., &amp; Coauthor, A. “Paper title.” <em>Journal or Conference</em>, 2025.
-        <div class="status">Published · <a href="papers/your-paper.pdf">View PDF</a></div>
-      </li>
-      <li>
-        Surname, I. “Another paper title.” <em>Journal</em>.
-        <div class="status">Under review</div>
-      </li>
-    </ul>
-  </section>
+<!-- 6. PUBLICATIONS: put PDFs in papers/ -->
+<section id="publications" class="grid">
+  <h2>Publications</h2>
+  <div>
+  <ul class="pubs">
 
-  <!-- 7. SKILLS -->
-  <section id="skills" class="grid">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div><h3>Software</h3><ul class="interests"><li>ArcGIS</li><li>R</li><li>Excel</li></ul></div>
-      <div><h3>Methods</h3><ul class="interests"><li>Method one</li><li>Method two</li></ul></div>
-      <div><h3>Languages</h3><ul class="interests"><li>Native language</li><li>English</li></ul></div>
-    </div>
-  </section>
+    <li>
+      Hoque, E., Klear, A., et al. &ldquo;Rheological insights into vat photopolymerization 3D printing of colloidal suspensions.&rdquo; <em>Additive Manufacturing</em>, 2026.
+      <a href="https://doi.org/10.1016/j.addma.2026.105298">https://doi.org/10.1016/j.addma.2026.105298</a>
+    </li>
 
-  <!-- 8. CONTACT -->
-  <section id="contact" class="grid contact">
-    <h2>Contact</h2>
+    <li>
+      Barber, S., Hoque, E., et al. &ldquo;Gelation dynamics in polydimethylsiloxane bottlebrush elastomers.&rdquo; <em>Macromolecular Rapid Communications</em>, 2025.
+      <a href="https://doi.org/10.1002/marc.202401072">https://doi.org/10.1002/marc.202401072</a>
+    </li>
+
+    <li>
+      Hoque, E., Tran, P., et al. &ldquo;Antimicrobial coatings for medical textiles via reactive organo-selenium compounds.&rdquo; <em>Molecules</em>, 2023.
+      <a href="https://doi.org/10.3390/molecules28176381">https://doi.org/10.3390/molecules28176381</a>
+    </li>
+
+    <li>
+      Hoque, E., Acharya, S., et al. &ldquo;Review of foam applications on cotton textiles.&rdquo; <em>Textile Research Journal</em>, 2023.
+      <a href="https://doi.org/10.1177/00405175221107400">https://doi.org/10.1177/00405175221107400</a>
+    </li>
+
+  </ul>
+
+  <p><a href="https://scholar.google.com/citations?hl=en&amp;user=i316QE8AAAAJ">View all on Google Scholar &rarr;</a></p>
+  </div>
+</section>
+
+
+<!-- 7. SKILLS -->
+<section id="skills" class="grid">
+  <h2>Skills</h2>
+  <div class="skills">
+
     <div>
-      <p>Open to collaborations, internships, and research positions.</p>
-      <a class="big" href="mailto:you@example.com">you@example.com</a>
-      <p><a href="https://www.linkedin.com/in/your-profile">LinkedIn</a> · <a href="https://github.com/yourusername">GitHub</a> · Your City, Country</p>
+      <h3>Experimental Techniques</h3>
+      <ul class="interests">
+        <li>Rheology</li>
+        <li>Thermal Analysis</li>
+        <li>Mechanical Testing</li>
+        <li>X-ray Scattering</li>
+      </ul>
     </div>
-  </section>
+
+    <div>
+      <h3>Statistical Process Control</h3>
+      <ul class="interests">
+        <li>Design of Experiments (DOE)</li>
+        <li>ANOVA</li>
+        <li>Regression</li>
+        <li>Hypothesis Testing</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Programming and Software</h3>
+      <ul class="interests">
+        <li>Python</li>
+        <li>SQL</li>
+        <li>JMP</li>
+        <li>Minitab</li>
+        <li>OriginPro</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 8. CERTIFICATIONS -->
+<section id="certifications" class="grid">
+  <h2>Certifications</h2>
+  <ul class="pubs">
+    <li>
+      <strong>Data Analysis with Python: From Raw Data to Insights</strong>
+      <div class="status">January 2027 &middot; IBM &middot; <a href="PASTE-LINK-HERE" target="_blank" rel="noopener">View credential</a></div>
+    </li>
+    <li>
+      <strong>SQL: A Practical Introduction for Querying Databases</strong>
+      <div class="status">December 2026 &middot; IBM &middot; <a href="PASTE-LINK-HERE" target="_blank" rel="noopener">View credential</a></div>
+    </li>
+    <li>
+      <strong>Design of Experiments</strong>
+      <div class="status">November 2026 &middot; Arizona State University &middot; <a href="https://coursera.org/share/a89f328dbc00f9e47bbc64ff678577a5" target="_blank" rel="noopener">View credential</a></div>
+    </li>
+    <li>
+      <strong>Data Analytics for Lean Six Sigma</strong>
+      <div class="status">September 2026 &middot; University of Amsterdam &middot; <a href="https://coursera.org/share/378bd1408a2f04ba7488227d34dd39a6" target="_blank" rel="noopener">View credential</a></div>
+    </li>
+  </ul>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="grid">
+  <h2>Contact</h2>
+  <div class="contact-body">
+    <p>Open to collaborations, full-time jobs, internships, and research positions.</p>
+
+    <div class="contact-icons">
+      <a class="icon-btn" href="mailto:ejajulhoque@gmail.com" aria-label="Email" title="ejajulhoque@gmail.com">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </a>
+
+      <a class="icon-btn" href="https://linkedin.com/in/ejajulhoque/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="contact-loc">
+      <span class="icon-btn" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </span>
+      <span>Cincinnati, OH</span>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer><div class="wrap">© 2026 Your Name</div></footer>
+
+
+<footer><div class="wrap">© 2026 Ejajul Hoque</div></footer>
 
 <script>
   var root=document.documentElement, btn=document.getElementById('theme');
