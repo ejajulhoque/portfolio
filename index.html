@@ -304,6 +304,15 @@ a.icon-btn:hover{
   font-weight:600;
 }
 
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:inherit;
+  display:block;
+}
+
 </style>
 </head>
 <body>
@@ -329,19 +338,19 @@ a.icon-btn:hover{
 
 <main class="wrap" id="top">
 
-  <!-- 1. HERO: replace text. Put your photo at img/profile.jpg -->
-  <div class="hero">
-    <div>
-      <h1>EJAJUL HOQUE</h1>
-      <div class="role">Ph.D. Candidate at the Department of Mechanical, Materials & Industrial Engineering at the University of Cincinnati</div>
-      <p>I study polymer structure-property relationships using rheology and x-ray scattering techniques, focusing on the optimization of polymer processing for sustainable and advanced applications.</p>
-      <div class="btns">
-        <a class="btn primary" href="#projects">See my projects</a>
-        <a class="btn" href="mailto:ejajulhoque@gmail.com">Email me</a>
-      </div>
+<!-- 1. HERO: put your photo at img/profile.jpg -->
+<div class="hero">
+  <div>
+    <h1>EJAJUL HOQUE</h1>
+    <div class="role">Ph.D. Candidate at the Department of Mechanical, Materials &amp; Industrial Engineering at the University of Cincinnati</div>
+    <p>I study polymer structure-property relationships using rheology and x-ray scattering techniques, focusing on the optimization of polymer processing for sustainable and advanced applications.</p>
+    <div class="btns">
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn" href="mailto:ejajulhoque@gmail.com">Email me</a>
     </div>
-    <div class="photo"><img src="img/profile.jpg" alt="Portrait of Your Name" onerror="this.remove();this.parentNode.textContent='YN'"></div>
   </div>
+  <div class="photo"><img src="img/profile.jpg" alt="Portrait of Ejajul Hoque" onerror="this.remove();this.parentNode.textContent='EH'"></div>
+</div>
 
 <!-- STATS -->
 <section class="grid">
