@@ -10,13 +10,14 @@
   =====================================================================
   FILE MAP (search for the "=====" banners to jump around)
     CSS   1 Theme tokens, 2 Base, 3 Buttons, 4 Layout, 5 Navigation,
-          6 Hero, 7 Stats, 8 Featured photos, 9 Timeline, 10 Chips,
-          11 Projects, 12 Records (publications + certifications),
-          13 Skills, 14 Contact, 15 Footer, 16 Progress bar,
-          17 Reduced motion
-    HTML  Header > Hero > Stats > Featured Photos > About > Education >
-          Experience > Projects > Publications > Skills >
-          Certifications > Contact > Footer
+          6 Hero + CV button, 7 Stats, 8 Featured photos, 9 Timeline,
+          10 Chips, 11 Projects, 12 Records (publications, achievements),
+          13 Skills + Achievements, 14 Contact, 15 Footer,
+          16 Progress bar, 17 Reduced motion
+    HTML  Header > CV button > Hero > Stats > Featured Photos >
+          About (with Skills) > Education > Experience > Research >
+          Publications > Achievements (Awards, Fellowships,
+          Certifications) > Contact > Footer
     JS    Theme toggle, Mobile menu, Scroll progress + active link,
           Photo carousel
 
@@ -24,12 +25,12 @@
     img/profile.jpg                      hero portrait (square works best)
     img/featured1.jpg ... featured5.jpg  carousel photos (16:10)
     img/project1.jpg ... project4.jpg    project card images
-    papers/                              PDFs, if you add any
-  Use lowercase file names with no spaces.
+    cv/Ejajul_Hoque_CV.pdf               file behind the "Download CV" button
+  Use lowercase file names with no spaces (the CV name above is fine).
 
   CONVENTIONS
     Dates: "Month YYYY &ndash; Month YYYY" (use &ndash;, not a typed dash)
-    Order: newest first in Education, Experience, Publications
+    Order: newest first in Education, Experience, Publications, Achievements
     Ampersand: write &amp; in text
     External links: always target="_blank" rel="noopener"
 
@@ -126,7 +127,7 @@ h1, h2, h3{
 }
 a.icon-btn:hover{ background:var(--accent); color:var(--accent-ink); }
 
-/* Text buttons (hero) */
+/* Text buttons (hero, About) */
 .btns{ display:flex; flex-wrap:wrap; gap:12px; }
 .btn{
   display:inline-block;
@@ -200,8 +201,23 @@ nav ul a.active::after{ transform:scaleX(1); }
 }
 
 /* =====================================================================
-   6. HERO (name, role, intro, circular portrait)
+   6. HERO (name, role, intro, circular portrait) + DOWNLOAD CV BUTTON
    ===================================================================== */
+/* Download CV: right-aligned row directly under the header */
+.cv-bar{ display:flex; justify-content:flex-end; padding-top:20px; }
+.cv-btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:12px 20px; border-radius:12px;
+  background:var(--tag);                                          /* fallback */
+  background:color-mix(in srgb, var(--ink) 7%, var(--surface));   /* soft gray, works in dark mode */
+  color:var(--ink); font-weight:600; text-decoration:none;
+}
+.cv-btn:hover{
+  background:var(--line);
+  background:color-mix(in srgb, var(--ink) 13%, var(--surface));
+}
+.cv-bar + .hero{ padding-top:32px; }   /* less space above the hero when the CV button is present */
+
 .hero{
   display:grid; grid-template-columns:1fr 280px; gap:48px; align-items:center;
   padding:72px 0 56px;
@@ -376,12 +392,13 @@ nav ul a.active::after{ transform:scaleX(1); }
 }
 
 /* =====================================================================
-   12. RECORDS (Publications and Certifications)  [class name: .pubs]
+   12. RECORDS (Publications, Awards, Fellowships, Certifications)
+   [class name: .pubs]
    ===================================================================== */
 .pubs{ display:grid; gap:16px; margin:0; padding:0; list-style:none; }
 .pubs li{ padding-left:16px; border-left:3px solid var(--accent); }
 .pubs a{ overflow-wrap:anywhere; }                 /* long DOIs wrap on phones */
-.pubs strong{                                      /* certification title */
+.pubs strong{                                      /* title of an award, fellowship, or certificate */
   font-family:"Newsreader", Georgia, serif; font-size:1.15rem; font-weight:600;
   color:var(--ink);
 }
@@ -389,11 +406,22 @@ nav ul a.active::after{ transform:scaleX(1); }
 .pubs .status a{ font-weight:600; }
 
 /* =====================================================================
-   13. SKILLS
+   13. SKILLS (inside About) AND ACHIEVEMENTS
    ===================================================================== */
+/* "Skills" sub-heading inside About */
+.subhead{
+  margin:36px 0 16px; padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:1.25rem;
+}
 .skills{ display:grid; gap:28px; }
 .skills h3{ margin-bottom:6px; font-size:1.05rem; }
 .skills .interests{ margin-top:0; }
+.cta{ margin-top:28px; }                           /* "See my Certifications" button row */
+
+/* Achievements groups: Awards, Fellowships, Certifications */
+.achv-group + .achv-group{ margin-top:40px; }
+.achv-group h3{ margin-bottom:14px; font-size:1.25rem; }
 
 /* =====================================================================
    14. CONTACT
@@ -410,6 +438,8 @@ footer{
   border-top:1px solid var(--line);
   color:var(--muted); font-size:.9rem;
 }
+.footer-text{ margin:0; }
+.footer-sep{ margin:0 .6em; color:var(--line); }
 
 /* =====================================================================
    16. SCROLL PROGRESS BAR (width is set by the script)
@@ -446,14 +476,14 @@ footer{
 <header>
   <div class="wrap">
     <nav aria-label="Main">
-      <a class="brand" href="#top">Ejajul Hoque</a>
+      <a class="brand" href="#top">Personal Portfolio</a>
       <ul id="links">
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#projects">Research</a></li>
         <li><a href="#publications">Publications</a></li>
-        <li><a href="#skills">Skills</a></li>
+        <li><a href="#achievements">Achievements</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="icon-btn" id="theme" type="button" aria-label="Switch light or dark mode">☀</button>
@@ -465,6 +495,22 @@ footer{
 <main class="wrap" id="top">
 
   <!-- =================================================================
+       DOWNLOAD CV
+       EDIT: put your PDF at cv/Ejajul_Hoque_CV.pdf. To change the name
+       people see when it downloads, edit the download="..." value.
+       ================================================================= -->
+  <div class="cv-bar">
+    <a class="cv-btn" href="cv/Ejajul_Hoque_CV.pdf" download="Ejajul_Hoque_CV.pdf">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download CV
+    </a>
+  </div>
+
+  <!-- =================================================================
        HERO
        EDIT: name, role, intro. Portrait file: img/profile.jpg
        (if the file is missing, the initials "EH" show instead)
@@ -472,8 +518,8 @@ footer{
   <div class="hero">
     <div>
       <h1>EJAJUL HOQUE</h1>
-      <div class="role">Ph.D. Candidate at the Department of Mechanical, Materials &amp; Industrial Engineering at the University of Cincinnati</div>
-      <p>I study polymer structure-property relationships using rheology and x-ray scattering techniques, focusing on the optimization of polymer processing for sustainable and advanced applications.</p>
+      <div class="role">Ph.D. Candidate, Materials Science, University of Cincinnati</div>
+      <p>I study polymer structure–property relationships using rheology and X-ray scattering techniques, with a focus on optimizing polymer processing for sustainable and advanced material applications.</p>
       <div class="btns">
         <a class="btn primary" href="#projects">See my projects</a>
         <a class="btn" href="mailto:ejajulhoque@gmail.com">Email me</a>
@@ -546,19 +592,63 @@ footer{
   </section>
 
   <!-- =================================================================
-       ABOUT
-       EDIT: the paragraph and the interest chips (one <li> per chip).
+       ABOUT (includes Skills)
+       EDIT: the paragraph, the interest chips (one <li> per chip), and
+       the skill groups (one <div> per group, one <li> per skill).
+       The button at the bottom jumps to Certifications (in Achievements).
        ================================================================= -->
   <section id="about" class="grid">
     <h2>About</h2>
     <div>
-      <p>I am originally from Bangladesh and moved to the United States to pursue my graduate studies. I am an ex-Textile Materials Engineer. The passion for polymers and fibrous materials drew me to the field of Polymer Science. Upon graduation, I aim to continue researching in industrial polymers in corporate R&amp;D setting.</p>
+      <p>I am originally from Bangladesh and moved to the United States to pursue my graduate studies. With a professional background in textile materials engineering, my passion for polymers and fibrous materials led me to the field of polymer science. Upon graduation, I aim to pursue a career in industrial polymer research and development (R&amp;D) within a corporate setting.</p>
       <ul class="interests" aria-label="Research interests">
-        <li>Speciality Polymers</li>
+        <li>Specialty Polymers</li>
+        <li>Polymer Processing</li>
+        <li>Materials Characterization</li>
+        <li>Structure–Property Relationships</li>
         <li>Process Optimization</li>
         <li>Design of Experiments</li>
-        <li>Problem Solving</li>
       </ul>
+
+      <h3 class="subhead">Skills</h3>
+      <div class="skills">
+
+        <div>
+          <h3>Experimental Techniques</h3>
+          <ul class="interests">
+            <li>Rheology</li>
+            <li>Thermal Analysis</li>
+            <li>Mechanical Testing</li>
+            <li>X-ray Scattering</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Statistical Process Control</h3>
+          <ul class="interests">
+            <li>Design of Experiments (DOE)</li>
+            <li>ANOVA</li>
+            <li>Regression</li>
+            <li>Hypothesis Testing</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Programming and Software</h3>
+          <ul class="interests">
+            <li>Python</li>
+            <li>SQL</li>
+            <li>JMP</li>
+            <li>Minitab</li>
+            <li>OriginPro</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="btns cta">
+        <a class="btn" href="#certifications">See my Certifications</a>
+      </div>
     </div>
   </section>
 
@@ -579,7 +669,7 @@ footer{
 
       <div class="item">
         <time>January 2020 &ndash; August 2022</time>
-        <h3>M.Sc. in Biopolymers</h3>
+        <h3>M.Sc. in Fibers & Textiles</h3>
         <div class="where">Texas Tech University</div>
         <p>CGPA 4.00. Thesis: Application of organoselenium compounds to cotton textiles to impart antimicrobial property.</p>
       </div>
@@ -659,14 +749,14 @@ footer{
   </section>
 
   <!-- =================================================================
-       PROJECTS
+       RESEARCH PROJECTS (menu label: Research)
        EDIT: copy one <article class="project"> block per project.
        Images: img/project1.jpg, project2.jpg, ... (about 600 x 400 px).
        If an image file is missing, the card shows full-width text only.
        Line 1 under the title = your role. Tags = <span> per tag.
        ================================================================= -->
   <section id="projects" class="grid">
-    <h2>Projects</h2>
+    <h2>Research Projects</h2>
     <div class="projects">
 
       <article class="project">
@@ -743,81 +833,95 @@ footer{
   </section>
 
   <!-- =================================================================
-       SKILLS
-       EDIT: one <div> per group (heading + chips). One <li> per chip.
+       ACHIEVEMENTS
+       Three groups: Awards & Honors, Fellowships & Scholarships,
+       Certifications. Newest first inside each group.
+       EDIT: copy one <li> per entry. Pattern:
+         <strong>Title</strong>
+         <div class="status">Organization &middot; Month YYYY</div>
+       The Certifications group has id="certifications" (target of the
+       "See my Certifications" button in About).
        ================================================================= -->
-  <section id="skills" class="grid">
-    <h2>Skills</h2>
-    <div class="skills">
+  <section id="achievements" class="grid">
+    <h2>Achievements</h2>
+    <div>
 
-      <div>
-        <h3>Experimental Techniques</h3>
-        <ul class="interests">
-          <li>Rheology</li>
-          <li>Thermal Analysis</li>
-          <li>Mechanical Testing</li>
-          <li>X-ray Scattering</li>
+      <!-- Awards & Honors -->
+      <div class="achv-group">
+        <h3>Awards &amp; Honors</h3>
+        <ul class="pubs">
+          <li>
+            <strong>Graduate Student Engineer of the Month</strong>
+            <div class="status">University of Cincinnati &middot; April 2027</div>
+          </li>
+          <li>
+            <strong>Best Poster Award (2nd Place)</strong>
+            <div class="status">Ohio Polymer and Soft Matter Symposium, Cleveland, OH &middot; May 2024</div>
+          </li>
         </ul>
       </div>
 
-      <div>
-        <h3>Statistical Process Control</h3>
-        <ul class="interests">
-          <li>Design of Experiments (DOE)</li>
-          <li>ANOVA</li>
-          <li>Regression</li>
-          <li>Hypothesis Testing</li>
+      <!-- Fellowships & Scholarships -->
+      <div class="achv-group">
+        <h3>Fellowships &amp; Scholarships</h3>
+        <ul class="pubs">
+          <li>
+            <strong>Society of Rheology Travel Grant</strong>
+            <div class="status">Society of Rheology &middot; June 2025</div>
+          </li>
+          <li>
+            <strong>GSG Research Fellowship</strong>
+            <div class="status">University of Cincinnati &middot; April 2024</div>
+          </li>
+          <li>
+            <strong>Bangladesh-Sweden Trust Fund Travel Grant</strong>
+            <div class="status">Government of Bangladesh &middot; December 2022</div>
+          </li>
+          <li>
+            <strong>Study Abroad Competitive Scholarship</strong>
+            <div class="status">Texas Tech University &middot; January 2022</div>
+          </li>
+          <li>
+            <strong>A. W. Young Endowed Scholarship</strong>
+            <div class="status">Texas Tech University &middot; August 2021</div>
+          </li>
+          <li>
+            <strong>Harold and Mary Dregne Graduate Endowed Scholarship</strong>
+            <div class="status">Texas Tech University &middot; August 2020</div>
+          </li>
+          <li>
+            <strong>Thompson Family of Abernathy Endowment Scholarship</strong>
+            <div class="status">Texas Tech University &middot; August 2020</div>
+          </li>
         </ul>
       </div>
 
-      <div>
-        <h3>Programming and Software</h3>
-        <ul class="interests">
-          <li>Python</li>
-          <li>SQL</li>
-          <li>JMP</li>
-          <li>Minitab</li>
-          <li>OriginPro</li>
+      <!-- Certifications -->
+      <div class="achv-group" id="certifications">
+        <h3>Certifications</h3>
+        <ul class="pubs">
+          <li>
+            <strong>Data Analysis with Python: From Raw Data to Insights</strong>
+            <!-- TODO: add link:  &middot; <a href="URL" target="_blank" rel="noopener">View credential</a> -->
+            <div class="status">January 2027 &middot; IBM</div>
+          </li>
+          <li>
+            <strong>SQL: A Practical Introduction for Querying Databases</strong>
+            <!-- TODO: add link:  &middot; <a href="URL" target="_blank" rel="noopener">View credential</a> -->
+            <div class="status">December 2026 &middot; IBM</div>
+          </li>
+          <li>
+            <strong>Design of Experiments</strong>
+            <div class="status">November 2026 &middot; Arizona State University &middot; <a href="https://coursera.org/share/a89f328dbc00f9e47bbc64ff678577a5" target="_blank" rel="noopener">View credential</a></div>
+          </li>
+          <li>
+            <strong>Data Analytics for Lean Six Sigma</strong>
+            <div class="status">September 2026 &middot; University of Amsterdam &middot; <a href="https://coursera.org/share/378bd1408a2f04ba7488227d34dd39a6" target="_blank" rel="noopener">View credential</a></div>
+          </li>
         </ul>
       </div>
 
     </div>
-  </section>
-
-  <!-- =================================================================
-       CERTIFICATIONS (newest first)
-       EDIT: copy one <li> per certificate. When you get a credential
-       link, add it to the status line like the last two entries.
-       Not in the top menu on purpose: the "Skills" link stays
-       highlighted here (see SECTION_ALIAS in the script).
-       ================================================================= -->
-  <section id="certifications" class="grid">
-    <h2>Certifications</h2>
-    <ul class="pubs">
-
-      <li>
-        <strong>Data Analysis with Python: From Raw Data to Insights</strong>
-        <!-- TODO: add link:  &middot; <a href="URL" target="_blank" rel="noopener">View credential</a> -->
-        <div class="status">January 2027 &middot; IBM</div>
-      </li>
-
-      <li>
-        <strong>SQL: A Practical Introduction for Querying Databases</strong>
-        <!-- TODO: add link:  &middot; <a href="URL" target="_blank" rel="noopener">View credential</a> -->
-        <div class="status">December 2026 &middot; IBM</div>
-      </li>
-
-      <li>
-        <strong>Design of Experiments</strong>
-        <div class="status">November 2026 &middot; Arizona State University &middot; <a href="https://coursera.org/share/a89f328dbc00f9e47bbc64ff678577a5" target="_blank" rel="noopener">View credential</a></div>
-      </li>
-
-      <li>
-        <strong>Data Analytics for Lean Six Sigma</strong>
-        <div class="status">September 2026 &middot; University of Amsterdam &middot; <a href="https://coursera.org/share/378bd1408a2f04ba7488227d34dd39a6" target="_blank" rel="noopener">View credential</a></div>
-      </li>
-
-    </ul>
   </section>
 
   <!-- =================================================================
@@ -860,8 +964,17 @@ footer{
 
 </main>
 
-<!-- FOOTER. EDIT: update the year when needed. -->
-<footer><div class="wrap">© 2026 Ejajul Hoque</div></footer>
+<!-- FOOTER. EDIT: update the year and the "Last updated" date (both the
+     datetime="YYYY-MM-DD" value and the visible MM/DD/YYYY) when you publish. -->
+<footer>
+  <div class="wrap">
+    <p class="footer-text">
+      &copy; 2026 Ejajul Hoque. All rights reserved.
+      <span class="footer-sep" aria-hidden="true">|</span>
+      Last updated: <time datetime="2026-11-24">11/24/2026</time>
+    </p>
+  </div>
+</footer>
 
 <script>
 'use strict';
@@ -911,13 +1024,14 @@ footer{
 /* =====================================================================
    SCROLL PROGRESS BAR + ACTIVE MENU LINK
    EDIT:
-     SECTION_ALIAS  sections without a menu link borrow another link's
-                    highlight (Certifications highlights Skills).
+     SECTION_ALIAS  a section without its own menu link borrows another
+                    link's highlight. Format: { 'section-id': 'menu-id' }
+                    (currently empty: every section has its own link).
      SWITCH_OFFSET  pixels from the top where the next section "takes
                     over" the highlight. Larger = switches sooner.
    ===================================================================== */
 (function(){
-  var SECTION_ALIAS = { certifications: 'skills' };
+  var SECTION_ALIAS = {};
   var SWITCH_OFFSET = 100;
 
   var bar = document.getElementById('progress');
