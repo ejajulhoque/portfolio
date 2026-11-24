@@ -156,10 +156,106 @@ section{padding:56px 0;border-top:1px solid var(--line)}
 footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* ---------- Scroll progress bar ---------- */
+.progress{
+  position:fixed;top:0;left:0;
+  height:3px;width:0;
+  z-index:20;
+  background:linear-gradient(90deg,#7fb5a0,#f2c27b,#e0705a);
+}
+
+/* ---------- Active menu link with underline ---------- */
+nav ul a{position:relative}
+nav ul a::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:-6px;
+  height:2px;border-radius:2px;
+  background:linear-gradient(90deg,#7fb5a0,#f2c27b);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .25s ease;
+}
+nav ul a.active{color:var(--ink)}
+nav ul a.active::after{transform:scaleX(1)}
+
+@media(max-width:760px){
+  nav ul a::after{display:none}              /* no underline in the dropdown menu */
+  nav ul a.active{color:var(--accent);font-weight:600}
+}
+@media(prefers-reduced-motion:reduce){
+  nav ul a::after{transition:none}
+}
+
+/* ---------- Featured photos ---------- */
+.featured-title{text-align:center;font-size:1.7rem;margin-bottom:24px}
+.reel{
+  --w:62%;                       /* width of the center photo */
+  position:relative;overflow:hidden;
+  padding:18px 0 24px;
+  touch-action:pan-y;
+}
+.reel:focus-visible{outline:3px solid var(--accent);outline-offset:4px;border-radius:12px}
+.reel-track{
+  position:relative;display:flex;gap:2.5%;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1);
+}
+.reel-slide{
+  position:relative;flex:0 0 var(--w);margin:0;
+  aspect-ratio:16/10;border-radius:14px;overflow:hidden;
+  background:linear-gradient(135deg,#7fb5a0,var(--accent));   /* shows if a photo is missing */
+  transform:scale(.86);opacity:.5;cursor:pointer;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .55s,box-shadow .55s;
+}
+.reel-slide.is-active{
+  transform:scale(1);opacity:1;cursor:default;
+  box-shadow:0 14px 34px rgba(20,35,43,.28);
+}
+.reel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+
+.reel-count,
+.reel-slide figcaption{opacity:0;transition:opacity .4s}
+.reel-slide.is-active .reel-count,
+.reel-slide.is-active figcaption{opacity:1}
+
+.reel-count{
+  position:absolute;top:0;right:0;
+  padding:6px 16px;border-radius:0 0 0 12px;
+  background:#f2c27b;color:#14232b;
+  font-size:.92rem;font-weight:600;
+}
+.reel-slide figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:12px 18px;text-align:center;
+  background:linear-gradient(90deg,rgba(15,37,48,.9),rgba(28,107,135,.9));
+  color:#fff;font-size:.98rem;
+}
+
+.reel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border:0;border-radius:50%;
+  background:#fff;color:#1c6b87;
+  font-size:1.9rem;line-height:1;cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  display:flex;align-items:center;justify-content:center;
+  padding:0 0 4px;
+}
+.reel-btn:hover{background:#1c6b87;color:#fff}
+.reel-btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.reel-btn.prev{left:calc((100% - var(--w)) / 2 + 12px)}
+.reel-btn.next{right:calc((100% - var(--w)) / 2 + 12px)}
+
+@media(max-width:760px){
+  .reel{--w:80%}
+  .reel-btn{width:38px;height:38px;font-size:1.6rem}
+  .reel-btn.prev{left:calc((100% - var(--w)) / 2 + 8px)}
+  .reel-btn.next{right:calc((100% - var(--w)) / 2 + 8px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .reel-track,.reel-slide,.reel-count,.reel-slide figcaption{transition:none}
+}
 </style>
 </head>
 <body>
-
+<div class="progress" id="progress" aria-hidden="true"></div>
 <header>
   <div class="wrap">
     <nav aria-label="Main">
@@ -204,6 +300,49 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
       <div class="stat"><div class="num">6+</div><div class="label">Years of Research</div></div>
     </div>
   </section>
+
+  <!-- FEATURED PHOTOS -->
+<section class="featured" aria-label="Featured photos">
+  <h2 class="featured-title">Featured Photos</h2>
+
+  <div class="reel" role="region" aria-roledescription="carousel" aria-label="Featured photos" tabindex="0">
+    <div class="reel-track">
+
+      <figure class="reel-slide">
+        <img src="img/featured1.jpg" alt="Describe photo 1" decoding="async" onerror="this.remove()">
+        <span class="reel-count"></span>
+        <figcaption>Caption for photo 1</figcaption>
+      </figure>
+
+      <figure class="reel-slide">
+        <img src="img/featured2.jpg" alt="Describe photo 2" decoding="async" onerror="this.remove()">
+        <span class="reel-count"></span>
+        <figcaption>Caption for photo 2</figcaption>
+      </figure>
+
+      <figure class="reel-slide">
+        <img src="img/featured3.jpg" alt="Describe photo 3" decoding="async" onerror="this.remove()">
+        <span class="reel-count"></span>
+        <figcaption>Caption for photo 3</figcaption>
+      </figure>
+
+      <figure class="reel-slide">
+        <img src="img/featured4.jpg" alt="Describe photo 4" decoding="async" onerror="this.remove()">
+        <span class="reel-count"></span>
+        <figcaption>Caption for photo 4</figcaption>
+      </figure>
+
+      <figure class="reel-slide">
+        <img src="img/featured5.jpg" alt="Describe photo 5" decoding="async" onerror="this.remove()">
+        <span class="reel-count"></span>
+        <figcaption>Caption for photo 5</figcaption>
+      </figure>
+
+    </div>
+    <button class="reel-btn prev" type="button" aria-label="Previous photo">&#8249;</button>
+    <button class="reel-btn next" type="button" aria-label="Next photo">&#8250;</button>
+  </div>
+</section>
 
   <!-- ABOUT -->
   <section id="about" class="grid">
@@ -343,7 +482,7 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
       <article class="project">
         <div class="img"><img src="img/project4.jpg" alt="" onerror="this.parentNode.remove()"></div>
         <div class="body">
-          <h3>Filler transport in tire rubber under tire&ndash;road contact</h3>
+          <h3>Filler particle transport within rubber matrix under tire&ndash;road contact</h3>
           <p>Collaborative Researcher</p>
           <p>Filler particles released from tires are an environmental concern, so it is important to understand how fillers move inside the rubber under the loading a tire experiences while driving. We studied particle motion in the rubber matrix using X-ray photon correlation spectroscopy (XPCS).</p>
           <div class="tags"><span>Tire-road Contact Simulation</span><span>Synchrotron X-ray Scattering</span><span>Rubbers</span></div>
@@ -503,6 +642,100 @@ footer{padding:32px 0;color:var(--muted);font-size:.9rem;border-top:1px solid va
     links.classList.remove('open');
     menuBtn.setAttribute('aria-expanded', false);
   });
+
+  /* Scroll progress bar and active menu link */
+(function(){
+  var bar = document.getElementById('progress');
+  var sections = [].slice.call(document.querySelectorAll('main section[id]'));
+  var navLinks = [].slice.call(document.querySelectorAll('#links a'));
+  var alias = { certifications: 'skills' };   // Certifications highlights "Skills"
+  var ticking = false;
+
+  function update(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
+
+    var current = '';
+    sections.forEach(function(s){
+      if (s.getBoundingClientRect().top <= 100) current = s.id;
+    });
+    if (sections.length && window.innerHeight + window.scrollY >= h.scrollHeight - 2){
+      current = sections[sections.length - 1].id;   // bottom of page = last section
+    }
+    current = alias[current] || current;
+
+    navLinks.forEach(function(a){
+      var on = a.getAttribute('href') === '#' + current;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+    ticking = false;
+  }
+
+  function onScroll(){
+    if (!ticking){ ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
+/* Featured photos carousel */
+(function(){
+  var reel = document.querySelector('.reel');
+  if (!reel) return;
+  var track = reel.querySelector('.reel-track');
+  var slides = [].slice.call(track.children);
+  var n = slides.length, i = 0, swiped = false, startX = null;
+
+  slides.forEach(function(s, k){
+    s.querySelector('.reel-count').textContent = (k + 1) + ' / ' + n;
+    s.setAttribute('role', 'group');
+    s.setAttribute('aria-roledescription', 'slide');
+    s.setAttribute('aria-label', (k + 1) + ' of ' + n);
+    s.addEventListener('click', function(){
+      if (swiped){ swiped = false; return; }
+      if (k !== i) go(k);
+    });
+  });
+
+  function place(){
+    var s = slides[i];
+    var x = s.offsetLeft + s.offsetWidth / 2 - reel.clientWidth / 2;
+    track.style.transform = 'translateX(' + (-x) + 'px)';
+  }
+  function update(){
+    slides.forEach(function(s, k){
+      var on = k === i;
+      s.classList.toggle('is-active', on);
+      s.setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+    place();
+  }
+  function go(k){ i = (k + n) % n; update(); }
+
+  reel.querySelector('.prev').addEventListener('click', function(){ go(i - 1); });
+  reel.querySelector('.next').addEventListener('click', function(){ go(i + 1); });
+  reel.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft'){ go(i - 1); e.preventDefault(); }
+    if (e.key === 'ArrowRight'){ go(i + 1); e.preventDefault(); }
+  });
+  reel.addEventListener('pointerdown', function(e){ startX = e.clientX; swiped = false; });
+  reel.addEventListener('pointerup', function(e){
+    if (startX === null) return;
+    var dx = e.clientX - startX; startX = null;
+    if (Math.abs(dx) > 40){ swiped = true; go(i + (dx < 0 ? 1 : -1)); }
+  });
+  reel.addEventListener('pointercancel', function(){ startX = null; });
+  window.addEventListener('resize', place);
+
+  track.style.transition = 'none';   // no slide-in animation on first load
+  update();
+  void track.offsetWidth;
+  track.style.transition = '';
+})();
 </script>
 </body>
 </html>
