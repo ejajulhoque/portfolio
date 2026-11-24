@@ -25,8 +25,8 @@
     img/profile.jpg                      hero portrait (square works best)
     img/featured1.jpg ... featured5.jpg  carousel photos (16:10)
     img/project1.jpg ... project4.jpg    project card images
-    cv/Ejajul_Hoque_CV.pdf               file behind the "Download CV" button
-  Use lowercase file names with no spaces (the CV name above is fine).
+    resume/Ejajul_Hoque_Resume.pdf               file behind the "Download Resume" button
+  Use lowercase file names with no spaces (the resume name above is fine).
 
   CONVENTIONS
     Dates: "Month YYYY &ndash; Month YYYY" (use &ndash;, not a typed dash)
@@ -201,18 +201,18 @@ nav ul a.active::after{ transform:scaleX(1); }
 }
 
 /* =====================================================================
-   6. HERO (name, role, intro, circular portrait) + DOWNLOAD CV BUTTON
+   6. HERO (name, role, intro, circular portrait) + DOWNLOAD Resume BUTTON
    ===================================================================== */
-/* Download CV: right-aligned row directly under the header */
-.cv-bar{ display:flex; justify-content:flex-end; padding-top:20px; }
-.cv-btn{
+/* Download Resume: right-aligned row directly under the header */
+.resume-bar{ display:flex; justify-content:flex-end; padding-top:20px; }
+.resume-btn{
   display:inline-flex; align-items:center; gap:10px;
   padding:12px 20px; border-radius:12px;
   background:var(--tag);                                          /* fallback */
   background:color-mix(in srgb, var(--ink) 7%, var(--surface));   /* soft gray, works in dark mode */
   color:var(--ink); font-weight:600; text-decoration:none;
 }
-.cv-btn:hover{
+.resume-btn:hover{
   background:var(--line);
   background:color-mix(in srgb, var(--ink) 13%, var(--surface));
 }
@@ -495,18 +495,18 @@ footer{
 <main class="wrap" id="top">
 
   <!-- =================================================================
-       DOWNLOAD CV
-       EDIT: put your PDF at cv/Ejajul_Hoque_CV.pdf. To change the name
+       DOWNLOAD RESUME
+       EDIT: put your PDF at resume/Ejajul_Hoque_Resume.pdf. To change the name
        people see when it downloads, edit the download="..." value.
        ================================================================= -->
-  <div class="cv-bar">
-    <a class="cv-btn" href="cv/Ejajul_Hoque_CV.pdf" download="Ejajul_Hoque_CV.pdf">
+  <div class="resume-bar">
+    <a class="resume-btn" href="resume/Ejajul_Hoque_Resume.pdf" download="Ejajul_Hoque_Resume.pdf">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
-      Download CV
+      Download Resume
     </a>
   </div>
 
@@ -802,33 +802,57 @@ footer{
     </div>
   </section>
 
-  <!-- =================================================================
-       PUBLICATIONS (newest first)
-       EDIT: copy one <li> per paper. Pattern:
-       Authors. &ldquo;Title.&rdquo; <em>Journal</em>, Year. DOI link
+    <!-- =================================================================
+       PUBLICATION AND PRESENTATION
+       Two groups: Journal Articles and Presentations. Newest first.
+       EDIT: copy one <li> per entry.
+       Article pattern:
+         Authors. &ldquo;Title.&rdquo; <em>Journal</em>, Year. DOI link
+       Presentation pattern:
+         &ldquo;Title,&rdquo; <em>Meeting</em>, City, Year.
+       The menu link stays "Publications" (href="#publications").
        ================================================================= -->
   <section id="publications" class="grid">
-    <h2>Publications</h2>
+    <h2>Publication and Presentation</h2>
     <div>
-      <ul class="pubs">
-        <li>
-          Hoque, E., Klear, A., et al. &ldquo;Rheological insights into vat photopolymerization 3D printing of colloidal suspensions.&rdquo; <em>Additive Manufacturing</em>, 2026.
-          <a href="https://doi.org/10.1016/j.addma.2026.105298" target="_blank" rel="noopener">https://doi.org/10.1016/j.addma.2026.105298</a>
-        </li>
-        <li>
-          Barber, S., Hoque, E., et al. &ldquo;Gelation dynamics in polydimethylsiloxane bottlebrush elastomers.&rdquo; <em>Macromolecular Rapid Communications</em>, 2025.
-          <a href="https://doi.org/10.1002/marc.202401072" target="_blank" rel="noopener">https://doi.org/10.1002/marc.202401072</a>
-        </li>
-        <li>
-          Hoque, E., Tran, P., et al. &ldquo;Antimicrobial coatings for medical textiles via reactive organo-selenium compounds.&rdquo; <em>Molecules</em>, 2023.
-          <a href="https://doi.org/10.3390/molecules28176381" target="_blank" rel="noopener">https://doi.org/10.3390/molecules28176381</a>
-        </li>
-        <li>
-          Hoque, E., Acharya, S., et al. &ldquo;Review of foam applications on cotton textiles.&rdquo; <em>Textile Research Journal</em>, 2023.
-          <a href="https://doi.org/10.1177/00405175221107400" target="_blank" rel="noopener">https://doi.org/10.1177/00405175221107400</a>
-        </li>
-      </ul>
-      <p><a href="https://scholar.google.com/citations?hl=en&amp;user=i316QE8AAAAJ" target="_blank" rel="noopener">View all on Google Scholar &rarr;</a></p>
+
+      <!-- Journal Articles -->
+      <div class="achv-group">
+        <h3>Journal Articles</h3>
+        <ul class="pubs">
+          <li>
+            Hoque, E., Klear, A., et al. &ldquo;Rheological insights into vat photopolymerization 3D printing of colloidal suspensions.&rdquo; <em>Additive Manufacturing</em>, 2026.
+            <a href="https://doi.org/10.1016/j.addma.2026.105298" target="_blank" rel="noopener">https://doi.org/10.1016/j.addma.2026.105298</a>
+          </li>
+          <li>
+            Barber, S., Hoque, E., et al. &ldquo;Gelation dynamics in polydimethylsiloxane bottlebrush elastomers.&rdquo; <em>Macromolecular Rapid Communications</em>, 2025.
+            <a href="https://doi.org/10.1002/marc.202401072" target="_blank" rel="noopener">https://doi.org/10.1002/marc.202401072</a>
+          </li>
+          <li>
+            Hoque, E., Tran, P., et al. &ldquo;Antimicrobial coatings for medical textiles via reactive organo-selenium compounds.&rdquo; <em>Molecules</em>, 2023.
+            <a href="https://doi.org/10.3390/molecules28176381" target="_blank" rel="noopener">https://doi.org/10.3390/molecules28176381</a>
+          </li>
+          <li>
+            Hoque, E., Acharya, S., et al. &ldquo;Review of foam applications on cotton textiles.&rdquo; <em>Textile Research Journal</em>, 2023.
+            <a href="https://doi.org/10.1177/00405175221107400" target="_blank" rel="noopener">https://doi.org/10.1177/00405175221107400</a>
+          </li>
+        </ul>
+        <p><a href="https://scholar.google.com/citations?hl=en&amp;user=i316QE8AAAAJ" target="_blank" rel="noopener">View all on Google Scholar &rarr;</a></p>
+      </div>
+
+      <!-- Presentations -->
+      <div class="achv-group">
+        <h3>Presentations</h3>
+        <ul class="pubs">
+          <li>
+            &ldquo;Rheology-guided flow-induced crystallization of poly(lactic acid) for controlled crystalline structure and degradation,&rdquo; <em>ACS Central Regional Meeting</em>, Cincinnati, OH, 2026.
+          </li>
+          <li>
+            &ldquo;A rheological perspective on digital light projection printability of colloidal suspensions,&rdquo; <em>Society of Rheology Annual Meeting</em>, Santa Fe, NM, 2025.
+          </li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -880,18 +904,6 @@ footer{
           <li>
             <strong>Study Abroad Competitive Scholarship</strong>
             <div class="status">Texas Tech University &middot; January 2022</div>
-          </li>
-          <li>
-            <strong>A. W. Young Endowed Scholarship</strong>
-            <div class="status">Texas Tech University &middot; August 2021</div>
-          </li>
-          <li>
-            <strong>Harold and Mary Dregne Graduate Endowed Scholarship</strong>
-            <div class="status">Texas Tech University &middot; August 2020</div>
-          </li>
-          <li>
-            <strong>Thompson Family of Abernathy Endowment Scholarship</strong>
-            <div class="status">Texas Tech University &middot; August 2020</div>
           </li>
         </ul>
       </div>
