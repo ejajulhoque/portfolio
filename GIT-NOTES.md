@@ -9,7 +9,7 @@ git config --global --list
 ```
 
 ## Where things are
-- Projects folder: `C:\Users\ejajr\projects`
+- Projects folder: `C:\Users\ejajr\projects\git_repositories\portfolio`
 - Check the repo is linked to GitHub: `git remote -v`
 
 ## Every session
