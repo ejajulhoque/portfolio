@@ -10,28 +10,30 @@
   =====================================================================
   FILE MAP (search for the "=====" banners to jump around)
     CSS   1 Theme tokens, 2 Base, 3 Buttons, 4 Layout, 5 Navigation,
-          6 Hero + CV button, 7 Stats, 8 Featured photos, 9 Timeline,
-          10 Chips, 11 Projects, 12 Records (publications, achievements),
-          13 Skills + Achievements, 14 Contact, 15 Footer,
-          16 Progress bar, 17 Reduced motion
-    HTML  Header > CV button > Hero > Stats > Featured Photos >
+          6 Hero + Resume button, 7 Stats, 8 Featured photos,
+          9 Timeline, 10 Chips, 11 Projects, 12 Records (publications,
+          achievements), 13 Skills + Achievements, 14 Contact,
+          15 Footer, 16 Progress bar, 17 Reduced motion
+    HTML  Header > Resume button > Hero > Stats > Featured Photos >
           About (with Skills) > Education > Experience > Research >
-          Publications > Achievements (Awards, Fellowships,
-          Certifications) > Contact > Footer
+          Publication and Presentation > Achievements (Awards,
+          Fellowships, Certifications) > Contact > Footer
     JS    Theme toggle, Mobile menu, Scroll progress + active link,
           Photo carousel
 
-  FOLDERS
-    img/profile.jpg                      hero portrait (square works best)
-    img/featured1.jpg ... featured5.jpg  carousel photos (16:10)
-    img/project1.jpg ... project4.jpg    project card images
-    resume/Ejajul_Hoque_Resume.pdf               file behind the "Download Resume" button
-  Use lowercase file names with no spaces (the resume name above is fine).
+  FOLDERS (all lowercase, no spaces)
+    img/profile.jpg                       hero portrait (square works best)
+    img/featured1.jpg ... featured5.jpg   carousel photos (1200 x 750 px)
+    img/project1_1.jpg, project1_2.jpg    project card images: number =
+    img/project2_1.jpg, project2_2.jpg    card order (top = 1), then _1 for
+    ...                                   the left image, _2 for the right
+                                          (1200 x 750 px, under 400 KB)
+    resume/Ejajul_Hoque_Resume.pdf        file behind "Download Resume"
 
   CONVENTIONS
     Dates: "Month YYYY &ndash; Month YYYY" (use &ndash;, not a typed dash)
     Order: newest first in Education, Experience, Publications, Achievements
-    Ampersand: write &amp; in text
+    Ampersand: always write &amp; in text (never a bare &)
     External links: always target="_blank" rel="noopener"
 
   PUBLISH (run inside the portfolio folder)
@@ -104,8 +106,7 @@ body{
 }
 a{ color:var(--accent); }
 a:focus-visible,
-button:focus-visible,
-summary:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; }
+button:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; }
 h1, h2, h3{
   font-family:"Newsreader", Georgia, serif;
   font-weight:600;
@@ -201,7 +202,7 @@ nav ul a.active::after{ transform:scaleX(1); }
 }
 
 /* =====================================================================
-   6. HERO (name, role, intro, circular portrait) + DOWNLOAD Resume BUTTON
+   6. HERO (name, role, intro, circular portrait) + RESUME BUTTON
    ===================================================================== */
 /* Download Resume: right-aligned row directly under the header */
 .resume-bar{ display:flex; justify-content:flex-end; padding-top:20px; }
@@ -216,7 +217,7 @@ nav ul a.active::after{ transform:scaleX(1); }
   background:var(--line);
   background:color-mix(in srgb, var(--ink) 13%, var(--surface));
 }
-.cv-bar + .hero{ padding-top:32px; }   /* less space above the hero when the CV button is present */
+.resume-bar + .hero{ padding-top:32px; }   /* less space above the hero when the button is present */
 
 .hero{
   display:grid; grid-template-columns:1fr 280px; gap:48px; align-items:center;
@@ -370,25 +371,47 @@ nav ul a.active::after{ transform:scaleX(1); }
 }
 
 /* =====================================================================
-   11. PROJECTS (cards with optional image)
+   11. PROJECTS (one card: details on top, two image boxes below)
+   The image strip always has two columns, so a single image stays in
+   the left half and the right half is reserved for a second image.
    ===================================================================== */
-.projects{ display:grid; gap:28px; }
+.projects{ display:grid; gap:36px; }
 .project{
-  display:grid; grid-template-columns:240px 1fr;
   overflow:hidden;
   background:var(--surface);
-  border:1px solid var(--line); border-radius:12px;
+  border:1px solid var(--line); border-radius:12px;   /* one border around everything */
 }
-.project:not(:has(.img)){ grid-template-columns:1fr; }   /* no image file = full-width text */
-.project .img{ min-height:170px; background:var(--tag); }
-.project .img img{ display:block; width:100%; height:100%; object-fit:cover; }
+
+/* Top part: details */
 .project .body{ padding:22px; }
 .project h3{ margin-bottom:6px; font-size:1.3rem; }
 .project p{ margin:0 0 10px; color:var(--muted); }
 .tags{ display:flex; flex-wrap:wrap; gap:6px; font-size:.82rem; }
 .tags span{ padding:2px 10px; border-radius:99px; background:var(--tag); }
+
+/* Bottom part: images, inside the same card */
+.shots{
+  display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px;
+  padding:16px 22px 22px;
+  background:var(--bg);                               /* soft tint separates images from text */
+  border-top:1px solid var(--line);
+}
+.shots:not(:has(.shot)){ display:none; }              /* no image files = no empty strip */
+.shot{
+  margin:0; padding:8px;
+  aspect-ratio:16/10;                                 /* matches 1200 x 750 px images */
+  background:#fff;                                    /* diagrams usually have white backgrounds */
+  border:1px solid var(--line); border-radius:8px;
+  overflow:hidden;
+}
+.shot img{
+  display:block; width:100%; height:100%;
+  object-fit:contain;                                 /* whole image visible. "cover" would fill but crop */
+}
+
 @media (max-width:760px){
-  .project{ grid-template-columns:1fr; }
+  .shots{ grid-template-columns:1fr; padding:14px; }  /* phones: images stack */
+  .project .body{ padding:18px; }
 }
 
 /* =====================================================================
@@ -419,7 +442,7 @@ nav ul a.active::after{ transform:scaleX(1); }
 .skills .interests{ margin-top:0; }
 .cta{ margin-top:28px; }                           /* "See my Certifications" button row */
 
-/* Achievements groups: Awards, Fellowships, Certifications */
+/* Groups inside Publications and Achievements */
 .achv-group + .achv-group{ margin-top:40px; }
 .achv-group h3{ margin-bottom:14px; font-size:1.25rem; }
 
@@ -496,8 +519,8 @@ footer{
 
   <!-- =================================================================
        DOWNLOAD RESUME
-       EDIT: put your PDF at resume/Ejajul_Hoque_Resume.pdf. To change the name
-       people see when it downloads, edit the download="..." value.
+       EDIT: put your PDF at resume/Ejajul_Hoque_Resume.pdf. To change
+       the name people see when it downloads, edit the download="..." value.
        ================================================================= -->
   <div class="resume-bar">
     <a class="resume-btn" href="resume/Ejajul_Hoque_Resume.pdf" download="Ejajul_Hoque_Resume.pdf">
@@ -519,7 +542,7 @@ footer{
     <div>
       <h1>EJAJUL HOQUE</h1>
       <div class="role">Ph.D. Candidate, Materials Science, University of Cincinnati</div>
-      <p>I study polymer structure–property relationships using rheology and X-ray scattering techniques, with a focus on optimizing polymer processing for sustainable and advanced material applications.</p>
+      <p>I study polymer structure&ndash;property relationships using rheology and X-ray scattering techniques, with a focus on optimizing polymer processing for sustainable and advanced material applications.</p>
       <div class="btns">
         <a class="btn primary" href="#projects">See my projects</a>
         <a class="btn" href="mailto:ejajulhoque@gmail.com">Email me</a>
@@ -546,8 +569,8 @@ footer{
        FEATURED PHOTOS (carousel)
        EDIT: to add a photo, copy one <figure class="reel-slide"> block.
        Change the file name, alt text, and caption. The "1 / 5" counter
-       updates itself. Photo size: about 1200 x 750 px (16:10), under
-       400 KB. If a file is missing, the green-teal placeholder shows.
+       updates itself. Photo size: 1200 x 750 px (16:10), under 400 KB.
+       If a file is missing, the green-teal placeholder shows.
        ================================================================= -->
   <section class="featured" aria-label="Featured photos">
     <h2 class="featured-title">Featured Photos</h2>
@@ -605,7 +628,7 @@ footer{
         <li>Specialty Polymers</li>
         <li>Polymer Processing</li>
         <li>Materials Characterization</li>
-        <li>Structure–Property Relationships</li>
+        <li>Structure&ndash;Property Relationships</li>
         <li>Process Optimization</li>
         <li>Design of Experiments</li>
       </ul>
@@ -624,7 +647,7 @@ footer{
         </div>
 
         <div>
-          <h3>Statistical Analysis & Process Optimization</h3>
+          <h3>Statistical Analysis &amp; Process Optimization</h3>
           <ul class="interests">
             <li>Design of Experiments (DOE)</li>
             <li>ANOVA</li>
@@ -635,7 +658,7 @@ footer{
         </div>
 
         <div>
-          <h3>Programming & Software</h3>
+          <h3>Programming &amp; Software</h3>
           <ul class="interests">
             <li>Python</li>
             <li>SQL</li>
@@ -671,7 +694,7 @@ footer{
 
       <div class="item">
         <time>January 2020 &ndash; August 2022</time>
-        <h3>M.Sc. in Fibers & Textiles</h3>
+        <h3>M.Sc. in Fibers &amp; Textiles</h3>
         <div class="where">Texas Tech University</div>
         <p>GPA: 4.00 / 4.00</p>
         <p>Thesis: Application of organoselenium compounds to cotton textiles to impart antimicrobial property.</p>
@@ -755,68 +778,86 @@ footer{
   <!-- =================================================================
        RESEARCH PROJECTS (menu label: Research)
        EDIT: copy one <article class="project"> block per project.
-       Images: img/project1.jpg, project2.jpg, ... (about 600 x 400 px).
-       If an image file is missing, the card shows full-width text only.
-       Line 1 under the title = your role. Tags = <span> per tag.
+       Line 1 under the title = your role. Tags = one <span> per tag.
+       Images: img/projectN_1.jpg (left) and img/projectN_2.jpg (right),
+       where N = the card's position (top card = 1). Size 1200 x 750 px,
+       under 400 KB. A single image stays in the left half; a missing
+       file removes its box; no files = no image strip at all.
+       Edit each alt text to describe the figure.
        ================================================================= -->
   <section id="projects" class="grid">
     <h2>Research Projects</h2>
     <div class="projects">
 
       <article class="project">
-        <div class="img"><img src="img/project1.jpg" alt="" onerror="this.parentNode.remove()"></div>
         <div class="body">
           <h3>3D printing of photoactive acrylate (nano-composite) resins</h3>
           <p>Lead Researcher</p>
-          <p>High filler loadings in nanocomposite resins pose significant challenges to DLP 3D printing of functional materials. I formulated a model silica–resin system to systematically investigate the relationship between resin rheology, printability, and printed-part properties. This study identified key processing challenges and revealed the limitations of shear rheology in predicting DLP printability.</p>
+          <p>High filler loadings in nanocomposite resins pose significant challenges to DLP 3D printing of functional materials. I formulated a model silica&ndash;resin system to systematically investigate the relationship between resin rheology, printability, and printed-part properties. This study identified key processing challenges and revealed the limitations of shear rheology in predicting DLP printability.</p>
           <div class="tags"><span>Photo-rheology</span><span>Structure-property Relationships</span><span>Thermoset Resins</span></div>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/project1_1.jpg" alt="Graphical abstract: can shear rheology predict the quality of a DLP printed part?" onerror="this.parentNode.remove()"></figure>
+          <figure class="shot"><img src="img/project1_2.jpg" alt="Second figure from the DLP 3D printing project" onerror="this.parentNode.remove()"></figure>
         </div>
       </article>
 
       <article class="project">
-        <div class="img"><img src="img/project2.jpg" alt="" onerror="this.parentNode.remove()"></div>
         <div class="body">
           <h3>Flow-induced crystallization of polylactic acid (PLA)</h3>
           <p>Lead Researcher</p>
           <p>High crystallinity in PLA limits its enzymatic degradation. I employed flow-induced crystallization (FIC) using a shear rheometer to tailor the crystalline morphology. This approach enhanced enzymatic degradation by 8 percentage points.</p>
           <div class="tags"><span>Melt Rheology</span><span>Flow-induced Crystallization</span><span>Thermoplastics</span></div>
         </div>
-      </article>
-
-      <article class="project">
-        <div class="img"><img src="img/project2.jpg" alt="" onerror="this.parentNode.remove()"></div>
-        <div class="body">
-          <h3>Development of organoselenium-based antimicrobial textiles</h3>
-          <p>Lead Researcher</p>
-          <p>Developing antimicrobial textiles without disrupting conventional textile manufacturing remains a challenge. We chemically functionalized cotton fabrics with reactive organoselenium compounds as novel antimicrobial agents. The modified fabrics achieved an 8-log reduction in microbial populations of S. aureus and C. albicans.</p>
-          <div class="tags"><span>Functionalization</span><span>Antimicrobial Assay</span><span>Collaboration</span></div>
+        <div class="shots">
+          <figure class="shot"><img src="img/project2_1.jpg" alt="Figure 1 from the flow-induced crystallization of PLA project" onerror="this.parentNode.remove()"></figure>
+          <figure class="shot"><img src="img/project2_2.jpg" alt="Figure 2 from the flow-induced crystallization of PLA project" onerror="this.parentNode.remove()"></figure>
         </div>
       </article>
 
       <article class="project">
-        <div class="img"><img src="img/project3.jpg" alt="" onerror="this.parentNode.remove()"></div>
+        <div class="body">
+          <h3>Development of organoselenium-based antimicrobial textiles</h3>
+          <p>Lead Researcher</p>
+          <p>Developing antimicrobial textiles without disrupting conventional textile manufacturing remains a challenge. We chemically functionalized cotton fabrics with reactive organoselenium compounds as novel antimicrobial agents. The modified fabrics achieved an 8-log reduction in microbial populations of <em>S. aureus</em> and <em>C. albicans</em>.</p>
+          <div class="tags"><span>Functionalization</span><span>Antimicrobial Assay</span><span>Collaboration</span></div>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/project3_1.jpg" alt="Figure 1 from the organoselenium antimicrobial textiles project" onerror="this.parentNode.remove()"></figure>
+          <figure class="shot"><img src="img/project3_2.jpg" alt="Figure 2 from the organoselenium antimicrobial textiles project" onerror="this.parentNode.remove()"></figure>
+        </div>
+      </article>
+
+      <article class="project">
         <div class="body">
           <h3>Cure kinetics and network formation in PDMS bottlebrush elastomers</h3>
           <p>Contributing Researcher</p>
           <p>Bottlebrush elastomers have grafted side chains that suppress entanglements, so their network formation differs from linear polymers. Using time-resolved rheology during catalytic curing, we tracked the sol&ndash;gel transition and showed that side chains lower the fractal dimension of the critical gel cluster. Time-cure superposition revealed a universal network formation process.</p>
-          <div class="tags"><span>Polymer Formulation</span><span>Time-cure superposition</span><span>Elastomers</span></div>
+          <div class="tags"><span>Polymer Formulation</span><span>Time-cure Superposition</span><span>Elastomers</span></div>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/project4_1.jpg" alt="Figure 1 from the PDMS bottlebrush elastomer project" onerror="this.parentNode.remove()"></figure>
+          <figure class="shot"><img src="img/project4_2.jpg" alt="Figure 2 from the PDMS bottlebrush elastomer project" onerror="this.parentNode.remove()"></figure>
         </div>
       </article>
 
       <article class="project">
-        <div class="img"><img src="img/project4.jpg" alt="" onerror="this.parentNode.remove()"></div>
         <div class="body">
           <h3>Filler particle transport within rubber matrix under tire&ndash;road contact</h3>
           <p>Contributing Researcher</p>
           <p>Filler particles released from tires are an environmental concern, so it is important to understand how fillers move inside the rubber under the loading a tire experiences while driving. We studied particle motion in the rubber matrix using X-ray photon correlation spectroscopy (XPCS).</p>
           <div class="tags"><span>Tire-road Contact Simulation</span><span>Synchrotron X-ray Scattering</span><span>Rubbers</span></div>
         </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/project5_1.jpg" alt="Figure 1 from the tire filler transport project" onerror="this.parentNode.remove()"></figure>
+          <figure class="shot"><img src="img/project5_2.jpg" alt="Figure 2 from the tire filler transport project" onerror="this.parentNode.remove()"></figure>
+        </div>
       </article>
 
     </div>
   </section>
 
-    <!-- =================================================================
+  <!-- =================================================================
        PUBLICATION AND PRESENTATION
        Two groups: Journal Articles and Presentations. Newest first.
        EDIT: copy one <li> per entry.
@@ -827,7 +868,7 @@ footer{
        The menu link stays "Publications" (href="#publications").
        ================================================================= -->
   <section id="publications" class="grid">
-    <h2>Publication & Presentation</h2>
+    <h2>Publication and Presentation</h2>
     <div>
 
       <!-- Journal Articles -->
@@ -997,7 +1038,7 @@ footer{
     <p class="footer-text">
       &copy; 2026 Ejajul Hoque. All rights reserved.
       <span class="footer-sep" aria-hidden="true">|</span>
-      Last updated: <time datetime="2026-11-24">11/24/2026</time>
+      Last updated: <time datetime="2026-11-26">11/26/2026</time>
     </p>
   </div>
 </footer>
